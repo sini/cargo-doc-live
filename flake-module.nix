@@ -48,7 +48,13 @@ in
                 cargo = lib.getExe pkgs.cargo;
               in
               {
-                tui = false;
+                cli = {
+                  environment.PC_DISABLE_TUI = true;
+                  # Global options for `process-compose`
+                  # options = {
+                  #   no-server = true;
+                  # };
+                };
                 settings.processes = {
                   cargo-doc = {
                     command = builtins.toString (pkgs.writeShellScript "cargo-doc" ''
